@@ -71,8 +71,11 @@ Do not put a space in the flag.
 Wrong:  python lcai_votable.py -- block 1880038
 Right:  python lcai_votable.py --block 1880038
 
+
 What the numbers mean
 Still in Hyperlane     not converted, not votable
 Released to wallets    native voting power minus the Hyperlane balance
 Eligible voting power  released minus treasury, deployer, and burn
 Majority               half of eligible voting power
+
+**This script is provided as-is for community use. It is not official governance output. Check the proposal page and the on-chain snapshot before you rely on the number.
