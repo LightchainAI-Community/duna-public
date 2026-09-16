@@ -1,0 +1,78 @@
+lcai_votable.py README
+
+LCAI votable supply
+This script snapshots Lightchain mainnet and reports DUNA voting power.
+
+It counts LCAI that has left the Hyperlane bridge and been converted to native.
+It excludes treasury, deployer, and burn wallets. Those coins are not votable.
+It also prints the number of votes needed for a majority.
+
+You can run a current snapshot, or a snapshot at the block a proposal went live.
+Requirements
+
+Python 3. No extra packages.
+
+Download Python from:
+https://www.python.org/downloads/
+
+On Windows, check "Add python.exe to PATH" during install.
+
+Install the script
+Download lcai_votable.py and save it in a folder on your machine.
+Example folder names: Desktop, Downloads, or a folder you create for LCAI tools.
+
+Open a terminal in that same folder.
+
+Windows PowerShell:
+cd path\to\the\folder
+
+Mac / Linux:
+cd path/to/the/folder
+
+Replace path\to\the\folder with the folder where you saved lcai_votable.py.
+
+
+Current snapshot (latest block)
+
+Windows PowerShell:
+python lcai_votable.py
+
+Mac / Linux:
+python3 lcai_votable.py
+
+This uses the latest Lightchain block and prints:
+
+coins still in the Hyperlane bridge
+coins released to native wallets
+treasury, deployer, and burn (not votable)
+eligible voting power
+votes needed for a majority
+
+Snapshot for a specific proposal
+Proposals lock voting power at the block they go live.
+Use that block. Do not use "right now."
+
+Find the snapshot block on the proposal page, then pass it with --block.
+
+Windows PowerShell:
+python lcai_votable.py --block 1880038
+
+Mac / Linux:
+python3 lcai_votable.py --block 1880038
+
+Example:
+Proposal
+https://dao.lightchain.ai/proposal/0xd216a0c0050edc3a9e0449ecfdf178a1652b4b68/93763932295299549450379337108809522635477552942297629077255848264117312701565
+
+If that proposal snapshot block is 1880038, run the command above.
+Replace 1880038 with the snapshot block for the proposal you are checking.
+
+Do not put a space in the flag.
+Wrong:  python lcai_votable.py -- block 1880038
+Right:  python lcai_votable.py --block 1880038
+
+What the numbers mean
+Still in Hyperlane     not converted, not votable
+Released to wallets    native voting power minus the Hyperlane balance
+Eligible voting power  released minus treasury, deployer, and burn
+Majority               half of eligible voting power
