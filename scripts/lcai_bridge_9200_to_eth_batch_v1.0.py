@@ -1,4 +1,12 @@
 #!/usr/bin/env python3
+"""
+DEPRECATED — use lcai_bridge_9200_to_eth_batch_v1.1.py instead.
+
+This version does not account for later-swap slippage + buffer as accurately
+as v1.1 and only supports USDC quoting.
+
+v1.1 is the current recommended script.
+"""
 """Build a 9200 native LCAI to Ethereum Clearing house Hyperlane transferRemote paste file."""
 
 import json
