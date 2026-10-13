@@ -1,0 +1,33 @@
+yaml
+name: Auto-Generate Document Hashes
+
+on:
+  push:
+    # Triggers the script whenever files change in your specific folder
+    paths:
+      - 'duna-public/**' 
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Allows GitHub to commit the hash file back to your repo
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Generate Hashes
+      run: |
+        cd duna-public/
+        # Finds all files (excluding the hash log itself) and calculates SHA-256
+        find . -type f ! -name 'hashes.txt' -exec sha256sum {} + > hashes.txt
+
+    - name: Commit and Push Hashes
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "41898282+github-actions[bot]@://github.com"
+        git add your-folder-name/hashes.txt
+        # Only commits if the hashes actually changed to avoid endless loops
+        git diff --quiet && git diff --staged --quiet || git commit -m "chore: auto-update document hashes [skip ci]"
+        git push
